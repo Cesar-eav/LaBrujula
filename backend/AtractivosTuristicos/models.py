@@ -4,9 +4,34 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
+
+class AtractivoTuristico(models.Model):
+    nombre = models.CharField(max_length=255)
+    descripcion = models.TextField()
+    address = models.CharField(max_length=255)
+    latitud = models.DecimalField(max_digits=10, decimal_places=8)
+    longitud = models.DecimalField(max_digits=11, decimal_places=8)
+    imagen = models.ImageField(upload_to='atractivos', blank=True, null=True)
+    is_verified = models.BooleanField(default=False)
+    contact_phone = models.CharField(max_length=20, blank=True)
+    contact_email = models.EmailField(blank=True)
+    website = models.URLField(blank=True)
+
+    def __str__(self):
+        return self.nombre
+
+
+class Comentario(models.Model):
+    atractivo_turistico = models.ForeignKey(AtractivoTuristico, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    texto = models.TextField()
+    calificacion = models.IntegerField(default=0)
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+    fecha_actualizacion = models.DateTimeField(auto_now=True)
+
 class Article(models.Model):
     publicidad = models.BooleanField(verbose_name="Publicidad", default=False) 
-    title = models.CharField(max_length=100, verbose_name="Lugar") 
+    place = models.CharField(max_length=100, verbose_name="Lugar") 
     artista = models.CharField(max_length=100, verbose_name="Artista")  
     gps = models.CharField(max_length=100, verbose_name="GPS", default="Sin GPS") 
     lat = models.DecimalField(max_digits=10, decimal_places=8, verbose_name="Lat", default=0) 
@@ -24,7 +49,7 @@ class Article(models.Model):
 
 
     def __str__(self):
-        return f"{self.title} - {self.artista}"
+        return f"{self.place} - {self.artista}"
 
 
 class Category(models.Model):
@@ -183,26 +208,3 @@ class Publicidad(models.Model):
         return f"{self.local_nombre}"
 
 
-class AtractivoTuristico(models.Model):
-    nombre = models.CharField(max_length=255)
-    descripcion = models.TextField()
-    address = models.CharField(max_length=255)
-    latitud = models.DecimalField(max_digits=10, decimal_places=8)
-    longitud = models.DecimalField(max_digits=11, decimal_places=8)
-    imagen = models.ImageField(upload_to='atractivos', blank=True, null=True)
-    is_verified = models.BooleanField(default=False)
-    contact_phone = models.CharField(max_length=20, blank=True)
-    contact_email = models.EmailField(blank=True)
-    website = models.URLField(blank=True)
-
-    def __str__(self):
-        return self.nombre
-
-
-class Comentario(models.Model):
-    atractivo_turistico = models.ForeignKey(AtractivoTuristico, on_delete=models.CASCADE)
-    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
-    texto = models.TextField()
-    calificacion = models.IntegerField(default=0)
-    fecha_creacion = models.DateTimeField(auto_now_add=True)
-    fecha_actualizacion = models.DateTimeField(auto_now=True)

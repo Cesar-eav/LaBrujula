@@ -33,8 +33,8 @@ export function EscalerasList() {
 
   return (
     <div>
-      <div className="flex flex-wrap gap-4 mx-5 bg-slate-100 justify-center ">
-        {atractivosMostrados.map((atractivo) => (
+      <div className="flex flex-wrap gap-1 mx-5 justify-center ">
+      {atractivosMostrados.map((atractivo) => (
           <AtractivoCard key={atractivo.id} atractivo={atractivo} />
         ))}
       </div>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getAllMurales } from "../api/atractivos.api";
-import { AtractivoCard } from "./AtractivoCard";
+import { StreetArtCard } from "./StreetArtCard";
 import Pagination from "react-paginate";
 
 
@@ -8,7 +8,7 @@ import Pagination from "react-paginate";
 export function AtractivosList() {
   const [atractivos, setAtractivos] = useState([]);
   const [paginaActual, setPaginaActual] = useState(0);
-  const atractivosPorPagina = 12;
+  const atractivosPorPagina = 20;
 
   useEffect(() => {
     async function loadAtractivos() {
@@ -33,9 +33,18 @@ export function AtractivosList() {
 
   return (
     <div>
-      <div className="flex flex-wrap gap-4 mx-5 bg-slate-100 justify-center ">
+      <div className="flex flex-wrap gap-0 mx-5 justify-center ">
         {atractivosMostrados.map((atractivo) => (
-          <AtractivoCard key={atractivo.id} atractivo={atractivo} />
+          <StreetArtCard 
+            key={atractivo.id} 
+            atractivo={atractivo}
+            onMouseOver={(e) => {
+              e.target.style.transform = "scale(1.1)";
+            }}
+            onMouseOut={(e) => {
+              e.target.style.transform = "scale(1)";
+            }}
+            />
         ))}
       </div>
       <div className="flex text-slate-700 justify-center">
