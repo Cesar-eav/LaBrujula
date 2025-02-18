@@ -29,7 +29,7 @@ class Comentario(models.Model):
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     fecha_actualizacion = models.DateTimeField(auto_now=True)
 
-class Article(models.Model):
+class StreetArt(models.Model):
     publicidad = models.BooleanField(verbose_name="Publicidad", default=False) 
     place = models.CharField(max_length=100, verbose_name="Lugar") 
     artista = models.CharField(max_length=100, verbose_name="Artista")  
@@ -49,7 +49,7 @@ class Article(models.Model):
 
 
     def __str__(self):
-        return f"{self.place} - {self.artista}"
+        return f"{self.content} - {self.artista}"
 
 
 class Category(models.Model):
