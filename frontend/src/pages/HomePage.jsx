@@ -1,4 +1,4 @@
-import {AtractivosList} from '../components/AtractivosList'
+import {StreetArtList} from '../components/StreetArtList'
 
 export function HomePage(){
     return (

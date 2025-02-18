@@ -1,7 +1,7 @@
-import {AtractivosList} from '../components/AtractivosList'
+import {StreetArtList} from '../components/StreetArtList'
 
 export function AtractivosPage(){
-    return <AtractivosList/>
+    return <StreetArtList/>
 }
 
 

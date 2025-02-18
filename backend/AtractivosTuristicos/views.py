@@ -1,20 +1,20 @@
 from rest_framework import viewsets
 from rest_framework.response import Response
 
-from .serializer import ArticleSerializer, CategorySerializer, MiradorSerializer, OtroSerializer, IglesiaSerializer, AscensorSerializer, EscaleraSerializer, ArquitecturaSerializer, AtractivoTuristicoSerializer, ComentarioSerializer, PublicidadSerializer
-from .models import Article, Category, Mirador, Otro, Iglesia, Ascensor, Escalera, Arquitectura, AtractivoTuristico, Comentario, Publicidad
+from .serializer import StreetArtSerializer, CategorySerializer, MiradorSerializer, OtroSerializer, IglesiaSerializer, AscensorSerializer, EscaleraSerializer, ArquitecturaSerializer, AtractivoTuristicoSerializer, ComentarioSerializer, PublicidadSerializer
+from .models import StreetArt, Category, Mirador, Otro, Iglesia, Ascensor, Escalera, Arquitectura, AtractivoTuristico, Comentario, Publicidad
 
 
 # La vista ArticleView maneja las solicitudes HTTP utilizando los métodos list, create, retrieve, update y destroy. 
 # Estos métodos se encargan de devolver respuestas adecuadas para cada tipo de solicitud.
 # Create your views here.
 
-class ArticleView(viewsets.ModelViewSet):
+class StreetArtView(viewsets.ModelViewSet):
     
-    serializer_class = ArticleSerializer
+    serializer_class = StreetArtSerializer
     
     #Devuelve todos los datos del modelo Article
-    queryset = Article.objects.all()
+    queryset = StreetArt.objects.all()
     
     def list(self, request):
         try:

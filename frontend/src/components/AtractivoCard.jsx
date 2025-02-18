@@ -23,7 +23,8 @@ export function AtractivoCard({ atractivo }) {
         <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
           <div className="bg-white p-4 rounded-lg w-1/2  ">
           <div className="text-black">
-                <h1>{atractivo.place}</h1>
+                
+                <h1>{atractivo.direccion}</h1> 
                 <h1>{atractivo.content}</h1> 
               </div>
             <img

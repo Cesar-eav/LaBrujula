@@ -25,7 +25,8 @@ export function StreetArtCard({ atractivo }) {
           <div className="text-black">
                 <p className="text-xl font-bold text-red-500">Lugar o Cerro:  {atractivo.place}</p>
                 {!(atractivo.artista === "sin info" || atractivo.artista === "sfo") && (<h1><span className="text-red-500 font-bold">Artista:</span> {atractivo.artista}</h1>)}                
-                <h1><span className="text-red-500 font-bold">Calle:</span> {atractivo.content}</h1> 
+                <h1><span className="text-red-500 font-bold">Calle:</span> {atractivo.direccion}</h1> 
+
               </div>
             <img
               src={atractivo.image}

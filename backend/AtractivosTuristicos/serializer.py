@@ -1,13 +1,13 @@
 from rest_framework import serializers
-from .models import Article, Category, Mirador, Otro, Iglesia, Ascensor, Escalera, Arquitectura, AtractivoTuristico, Comentario, Publicidad
+from .models import StreetArt, Category, Mirador, Otro, Iglesia, Ascensor, Escalera, Arquitectura, AtractivoTuristico, Comentario, Publicidad
 
-class ArticleSerializer(serializers.ModelSerializer):
+class StreetArtSerializer(serializers.ModelSerializer):
     
     lat = serializers.DecimalField(max_digits=10, decimal_places=8)
     lon = serializers.DecimalField(max_digits=11, decimal_places=8)
     
     class Meta: 
-        model = Article
+        model = StreetArt
         fields = '__all__'
         
     def to_representation(self, instance):

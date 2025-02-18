@@ -9,7 +9,7 @@ router = routers.DefaultRouter()
 # Primer parametro es la parte final de la url
 router.register(r'AtractivosTuristicos', views.AtractivoTuristicoView, 'atractivos')
 router.register(r'ascensores', views.AscensorView, 'ascensores')
-router.register(r'murales', views.ArticleView, 'murales')
+router.register(r'murales', views.StreetArtView, 'murales')
 router.register(r'iglesias', views.IglesiaView, 'iglesias')
 router.register(r'escaleras', views.EscaleraView, 'escaleras')
 router.register(r'arquitectura', views.ArquitecturaView, 'arquitectura')

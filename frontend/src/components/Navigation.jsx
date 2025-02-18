@@ -16,7 +16,7 @@ export function Navigation() {
         <Link to="/ascensores" className="text-white hover:text-gray-200">
           Ascensores
         </Link>
-        <Link to="/atractivos" className="text-white hover:text-gray-200">
+        <Link to="/streetart" className="text-white hover:text-gray-200">
           Street Art
         </Link>
         <Link to="/arquitectura" className="text-white hover:text-gray-200">

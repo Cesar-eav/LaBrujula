@@ -5,7 +5,7 @@ import Pagination from "react-paginate";
 
 
 
-export function AtractivosList() {
+export function StreetArtList() {
   const [atractivos, setAtractivos] = useState([]);
   const [paginaActual, setPaginaActual] = useState(0);
   const atractivosPorPagina = 20;
