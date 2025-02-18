@@ -36,7 +36,7 @@ class StreetArt(models.Model):
     gps = models.CharField(max_length=100, verbose_name="GPS", default="Sin GPS") 
     lat = models.DecimalField(max_digits=10, decimal_places=8, verbose_name="Lat", default=0) 
     lon = models.DecimalField(max_digits=11, decimal_places=8, verbose_name="Lon", default=0)
-    content = models.TextField(verbose_name="Contenido")
+    direccion = models.TextField(verbose_name="direccion")
     image = models.ImageField(upload_to="articles", blank=True, null=True, verbose_name="Miniatura")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -49,7 +49,7 @@ class StreetArt(models.Model):
 
 
     def __str__(self):
-        return f"{self.content} - {self.artista}"
+        return f"{self.direccion} - {self.artista}"
 
 
 class Category(models.Model):
