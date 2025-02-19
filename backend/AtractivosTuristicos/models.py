@@ -65,11 +65,11 @@ class Category(models.Model):
 ### MIRADORES ###
 
 class Mirador(models.Model):
-    cerro = models.CharField(max_length=100, verbose_name="nombre", default="Cerro")
-    lugar = models.CharField(max_length=100, verbose_name="Lugar", default="Nombre") 
+    nombre = models.CharField(max_length=100, verbose_name="nombre", default="Cerro")
+    place = models.CharField(max_length=100, verbose_name="Lugar", default="Nombre") 
+    direccion = models.CharField(max_length=100, verbose_name="calle", default="calle")   
     lat = models.DecimalField(max_digits=10, decimal_places=8, verbose_name="Lat", default=0) 
     lon = models.DecimalField(max_digits=11, decimal_places=8, verbose_name="Long", default=0)
-    calle = models.CharField(max_length=100, verbose_name="calle", default="calle")   
     image = models.ImageField(upload_to="miradores", blank=True, null=True, verbose_name="Miniatura")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -81,7 +81,7 @@ class Mirador(models.Model):
 
 
     def __str__(self):
-        return f"{self.lugar}"
+        return f"{self.nombre} - {self.place}"
 
 
 ### OTROS ###
@@ -141,6 +141,9 @@ class Ascensor(models.Model):
         verbose_name = "Ascensor"
         db_table = "AtractivosTuristicos_ascensor"
 
+    def __str__(self):
+        return f"{self.nombre}"
+
 
 # ---------------------------------
 class Escalera(models.Model):
@@ -167,10 +170,10 @@ class Escalera(models.Model):
 
 class Arquitectura(models.Model):
     publicidad = models.BooleanField(verbose_name="Publicidad", default=False)
-    lugar = models.CharField(max_length=100)
-    descripcion = models.CharField(max_length=250)
+    place = models.CharField(max_length=100)
+    nombre = models.CharField(max_length=250)
     direccion = models.CharField(max_length=250, default="dir")
-    antecedentes = models.TextField(max_length=250, default="")
+    content = models.TextField(max_length=1000, default="")
     lat = models.DecimalField(max_digits=10, decimal_places=8, verbose_name="Lat", default=0)
     lon = models.DecimalField(max_digits=11, decimal_places=8, verbose_name="Lon", default=0)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -184,7 +187,7 @@ class Arquitectura(models.Model):
 
 
     def __str__(self):
-        return f"{self.descripcion}"
+        return f"{self.nombre}"
 
 
 class Publicidad(models.Model):
