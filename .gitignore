@@ -1,0 +1,6 @@
+# Archivos y directorios comunes
+.idea/
+.vscode/
+*.DS_Store
+*.tmp
+*.bak

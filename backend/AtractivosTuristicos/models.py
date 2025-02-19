@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+# from ckeditor.fields import RichTextUploadingField
+from django_ckeditor_5.fields import CKEditor5Field
 
 
 # Create your models here.
@@ -109,7 +111,7 @@ class Iglesia(models.Model):
     nombre = models.CharField(max_length=100, default="")
     direccion = models.CharField(max_length=100, default="")
     lugar = models.CharField(max_length=100, default="")
-    descripcion = models.TextField(max_length=250)
+    content = CKEditor5Field(default='Sin contenido')
     lat = models.DecimalField(max_digits=10, decimal_places=8, verbose_name="Lat", default=0) 
     lon = models.DecimalField(max_digits=11, decimal_places=8, verbose_name="Lon", default=0)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -148,8 +150,8 @@ class Ascensor(models.Model):
 # ---------------------------------
 class Escalera(models.Model):
     modelos = models.CharField(max_length=100, default="")
-    lugar = models.CharField(max_length=100)
-    descripcion = models.CharField(max_length=250)
+    place = models.CharField(max_length=100)
+    nombre = models.CharField(max_length=250)
     autor = models.CharField(max_length=100, default="")
     direccion = models.CharField(max_length=250, default="dir")
     lat = models.DecimalField(max_digits=10, decimal_places=8, verbose_name="Lat", default=0)
@@ -165,7 +167,7 @@ class Escalera(models.Model):
 
 
     def __str__(self):
-        return f"{self.descripcion}"
+        return f"{self.nombre}"
 
 
 class Arquitectura(models.Model):
@@ -173,7 +175,7 @@ class Arquitectura(models.Model):
     place = models.CharField(max_length=100)
     nombre = models.CharField(max_length=250)
     direccion = models.CharField(max_length=250, default="dir")
-    content = models.TextField(max_length=1000, default="")
+    content =  CKEditor5Field()
     lat = models.DecimalField(max_digits=10, decimal_places=8, verbose_name="Lat", default=0)
     lon = models.DecimalField(max_digits=11, decimal_places=8, verbose_name="Lon", default=0)
     created_at = models.DateTimeField(auto_now_add=True)

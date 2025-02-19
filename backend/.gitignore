@@ -1,0 +1,7 @@
+# Archivos y directorios de Django
+*.pyc
+__pycache__/
+media/
+env/
+venv/
+*.env
