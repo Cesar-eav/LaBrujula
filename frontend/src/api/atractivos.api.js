@@ -1,5 +1,7 @@
 import axios from 'axios'
 
+
+
 export const getAllAtractivos = () => {
     return axios.get('http://127.0.0.1:8000/atractivos/api/v1/AtractivosTuristicos/')
 
@@ -32,3 +34,10 @@ export const getAllMiradores= () => {
     return axios.get('http://127.0.0.1:8000/atractivos/api/v1/miradores/')
 
 }
+
+// AXIOS
+const atractivosApi = axios.create({
+    baseURL: 'http://127.0.0.1:8000/atractivos/api/v1/'
+})
+
+export const createAtractivo = (atractivo) => atractivosApi.post('murales/', atractivo);
