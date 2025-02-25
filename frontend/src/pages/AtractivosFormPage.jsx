@@ -1,16 +1,17 @@
 import { useForm } from 'react-hook-form';
 import { createAtractivo } from '../api/atractivos.api';
 import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
+
 
 export function AtractivosFormPage() {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [image, setImage] = useState(null);
   const [tipoAtractivo, setTipoAtractivo] = useState(null); // Nuevo estado para el tipo de atractivo
-
+  const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     const formData = new FormData();
-
     formData.append('place', data.place);
     formData.append('direccion', data.direccion);
     formData.append('artista', data.artista);
@@ -26,6 +27,8 @@ export function AtractivosFormPage() {
     try {
       const res = await createAtractivo(formData);
       console.log(res);
+      navigate("/streetart");
+
     } catch (error) {
       console.error("Error al crear atractivo:", error);
     }
@@ -62,19 +65,9 @@ export function AtractivosFormPage() {
 
 
           <div className="mb-4">
-            <label htmlFor="direccion" className="block text-gray-700 text-sm font-bold mb-2">Dirección</label>
+            <label htmlFor="direccion" className="block text-gray-700 text-sm font-bold mb-2">Dirección o Calle </label>
             <input type="text" id="direccion" placeholder="Ingrese la dirección" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" {...register("direccion", { required: true })} />
             {errors.direccion && <span className="text-red-500 text-xs italic">Este campo es requerido</span>}
-          </div>
-
-          <div className="mb-4">
-            <label htmlFor="referencias" className="block text-gray-700 text-sm font-bold mb-2">Referencias de la Ubicación</label>
-            <textarea
-              id="referencias"
-              placeholder="Ingrese referencias de la ubicación (ej: cerca de la plaza, al lado del supermercado)"
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline h-12"
-              {...register("referencias")}
-            />
           </div>
 
 
@@ -82,6 +75,15 @@ export function AtractivosFormPage() {
           {tipoAtractivo === 'mural' && (
             <>
 
+              <div className="mb-4">
+                <label htmlFor="referencias" className="block text-gray-700 text-sm font-bold mb-2">Referencias de la Ubicación</label>
+                <textarea
+                  id="referencias"
+                  placeholder="Ingrese referencias de la ubicación (ej: cerca de la plaza, al lado del supermercado)"
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline h-12"
+                  {...register("referencias")}
+                />
+              </div>
               <div className="mb-4">
                 <label htmlFor="artista" className="block text-gray-700 text-sm font-bold mb-2">Artista (Opcional)</label>
                 <input type="text" id="artista" placeholder="Ingrese el artista" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" {...register("artista")} /> {/* required quitado */}
@@ -91,10 +93,6 @@ export function AtractivosFormPage() {
                 <textarea id="descripcion" placeholder="Ingrese una descripción del mural" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline h-20" {...register("descripcion", { required: true })} />
                 {errors.descripcion && <span className="text-red-500 text-xs italic">Este campo es requerido</span>}
               </div>
-
-
-
-
             </>
           )}
 
@@ -103,18 +101,15 @@ export function AtractivosFormPage() {
           {tipoAtractivo === 'iglesia' && (
             <>
               <div className="mb-4">
-                <p className="text-2xl text-red-500">IGLESIAS</p>
-                <label htmlFor="nombreParroco" className="block text-gray-700 text-sm font-bold mb-2">Nombre del Párroco</label>
+                <label htmlFor="nombreParroco" className="block text-gray-700 text-sm font-bold mb-2">Nombre de la iglesia</label>
                 <input type="text" id="nombreParroco" placeholder="Ingrese el nombre del párroco" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" {...register("nombreParroco", { required: true })} />
                 {errors.nombreParroco && <span className="text-red-500 text-xs italic">Este campo es requerido</span>}
               </div>
 
 
-              {/* ... otros campos específicos para iglesias */}
             </>
           )}
 
-          {/* ... (campos específicos para otros tipos de atractivos) */}
 
           {/* Campo de imagen (común a todos) */}
           <div className="mb-4 col-span-1 md:col-span-2 lg:col-span-3">
@@ -130,7 +125,9 @@ export function AtractivosFormPage() {
 
           {/* Botón de guardar (común a todos) */}
           <div className="col-span-1 md:col-span-2 lg:col-span-3 text-center">
-            <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline">
+            <button
+              type="submit"
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline">
               Guardar
             </button>
           </div>
