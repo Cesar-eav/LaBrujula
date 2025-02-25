@@ -25,6 +25,7 @@ export function AtractivoCard({ atractivo }) {
           <div className="text-black">
           <h1>
           <span className="text-back text-2xl font-bold"> {atractivo.nombre}</span></h1> 
+          <h1><span className="text-red-500 font-bold">¿Dónde?</span> {atractivo.place}</h1> 
           <h1><span className="text-red-500 font-bold">Calle:</span> {atractivo.direccion}</h1> 
           <div className="text-justify" dangerouslySetInnerHTML={{ __html: atractivo.content }} />
 
