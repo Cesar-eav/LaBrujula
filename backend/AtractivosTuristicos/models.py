@@ -110,7 +110,7 @@ class Otro(models.Model):
 class Iglesia(models.Model):
     nombre = models.CharField(max_length=100, default="")
     direccion = models.CharField(max_length=100, default="")
-    lugar = models.CharField(max_length=100, default="")
+    place = models.CharField(max_length=100, default="")
     content = CKEditor5Field(default='Sin contenido')
     lat = models.DecimalField(max_digits=10, decimal_places=8, verbose_name="Lat", default=0) 
     lon = models.DecimalField(max_digits=11, decimal_places=8, verbose_name="Lon", default=0)
