@@ -41,3 +41,5 @@ const atractivosApi = axios.create({
 })
 
 export const createAtractivo = (atractivo) => atractivosApi.post('murales/', atractivo);
+export const createIglesia = (atractivo) => atractivosApi.post('iglesias/', atractivo);
+
