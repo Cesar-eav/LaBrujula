@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { createAtractivo } from '../api/atractivos.api';
+import { createAtractivo, createIglesia } from '../api/atractivos.api';
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
@@ -14,23 +14,42 @@ export function AtractivosFormPage() {
     const formData = new FormData();
     formData.append('place', data.place);
     formData.append('direccion', data.direccion);
-    formData.append('artista', data.artista);
     formData.append('lat', data.lat);
     formData.append('lon', data.lon);
-    formData.append('referencias', data.referencias);
-    formData.append('descripcion', data.descripcion);
+    formData.append('content', data.content);
+
 
     if (image) {
       formData.append('image', image);
     }
 
-    try {
-      const res = await createAtractivo(formData);
-      console.log(res);
-      navigate("/streetart");
+    if (tipoAtractivo === 'mural') {
+      formData.append('artista', data.artista);
+      formData.append('referencias', data.referencias);
 
-    } catch (error) {
-      console.error("Error al crear atractivo:", error);
+      try {
+        const res = await createAtractivo(formData);
+        console.log(res.response);
+        navigate("/streetart");
+
+      } catch (error) {
+        console.error("Error al crear StreetArt:", error);
+      }
+
+    } else if (tipoAtractivo == 'iglesia') {
+      formData.append('nombre', data.nombre);
+
+      try {
+        const res = await createIglesia(formData);
+        console.log(res);
+        // navigate("/iglesias");
+
+      } catch (error) {
+        console.error("Error al crear Iglesia", error);
+      }
+
+    } else {
+      console.error("Tipo de atractivo no válido")
     }
   };
 
@@ -70,12 +89,16 @@ export function AtractivosFormPage() {
             {errors.direccion && <span className="text-red-500 text-xs italic">Este campo es requerido</span>}
           </div>
 
-
+          <div className="mb-4">
+            <label htmlFor="content" className="block text-gray-700 text-sm font-bold mb-2">Descripción</label>
+            <textarea id="content" placeholder="Ingrese una descripción del atractivo" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline h-20" {...register("content", { required: true })} />
+            {errors.content && <span className="text-red-500 text-xs italic">Este campo es requerido</span>}
+          </div>
           {/* STREET ART */}
           {tipoAtractivo === 'mural' && (
             <>
 
-              <div className="mb-4">
+              <div className="mb-4 bg-red-200 p-2">
                 <label htmlFor="referencias" className="block text-gray-700 text-sm font-bold mb-2">Referencias de la Ubicación</label>
                 <textarea
                   id="referencias"
@@ -84,15 +107,11 @@ export function AtractivosFormPage() {
                   {...register("referencias")}
                 />
               </div>
-              <div className="mb-4">
+              <div className="mb-4 bg-red-200 p-2">
                 <label htmlFor="artista" className="block text-gray-700 text-sm font-bold mb-2">Artista (Opcional)</label>
                 <input type="text" id="artista" placeholder="Ingrese el artista" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" {...register("artista")} /> {/* required quitado */}
               </div>
-              <div className="mb-4">
-                <label htmlFor="descripcion" className="block text-gray-700 text-sm font-bold mb-2">Descripción del Mural</label>
-                <textarea id="descripcion" placeholder="Ingrese una descripción del mural" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline h-20" {...register("descripcion", { required: true })} />
-                {errors.descripcion && <span className="text-red-500 text-xs italic">Este campo es requerido</span>}
-              </div>
+
             </>
           )}
 
@@ -100,10 +119,10 @@ export function AtractivosFormPage() {
 
           {tipoAtractivo === 'iglesia' && (
             <>
-              <div className="mb-4">
-                <label htmlFor="nombreParroco" className="block text-gray-700 text-sm font-bold mb-2">Nombre de la iglesia</label>
-                <input type="text" id="nombreParroco" placeholder="Ingrese el nombre del párroco" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" {...register("nombreParroco", { required: true })} />
-                {errors.nombreParroco && <span className="text-red-500 text-xs italic">Este campo es requerido</span>}
+              <div className="mb-4 bg-red-200 p-2">
+                <label htmlFor="nombre" className="block text-gray-700 text-sm font-bold mb-2">Nombre de la iglesia</label>
+                <input type="text" id="nombre" placeholder="Ingrese el nombre del párroco" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" {...register("nombre", { required: true })} />
+                {errors.nombre && <span className="text-red-500 text-xs italic">Este campo es requerido</span>}
               </div>
 
 
@@ -164,16 +183,6 @@ export function AtractivosFormPage() {
       {renderFormulario()} {/* Renderizado condicional del formulario */}
 
 
-      <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-
-
-
-
-
-
-
-
-      </form>
     </div>
   );
 }
