@@ -32,7 +32,6 @@ export function AtractivoCard({ atractivo }) {
               </div>
             <img
               src={atractivo.image}
-              style={{ width: "100%", height: "100%" }}
               
             />
             <div className="flex justify-between mx-2 ">
